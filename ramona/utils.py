@@ -40,7 +40,11 @@ All file descriptors above 2 are closed.
 	else:
 		close_fds()
 		pythonexec = get_python_exec()
-		os.execl(pythonexec, os.path.basename(pythonexec), *cmdline)
+		# this original line starts system-wide python2.7 - therefore no modules from virtualenv are available
+		#os.execl(pythonexec, os.path.basename(pythonexec), *cmdline)
+		# this line starts python2.7 with venv site-packages available 
+		# (if you run the main .py with ..path-to-your-project../venv/bin/python2.7 of course)
+		os.execl(pythonexec, pythonexec, *cmdline)
 
 #
 
